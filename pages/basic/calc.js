@@ -41,7 +41,7 @@ export default function Calc(){
         <br />
         <label><b>Num2</b></label>
         <input type="text" name="num2" onChange={handleChange}/><br />
-        <input type="submit" value="BMI 체크"/>
+        <input type="submit" value="계산"/>
         </form>
         <div>계산결과: <span id="result-span"></span></div>
     </>
