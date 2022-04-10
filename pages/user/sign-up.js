@@ -11,15 +11,10 @@ export default function SignUp(){
     }
     const handleSubmit = e =>{
         e.preventDefault()
-        alert(`넘어가는 JSON : ${JSON.stringify(inputs)}`)
+        alert(`등록 할 회원정보 : ${JSON.stringify(inputs)}`)
         axios.post('http://localhost:5000/api/user/signup', inputs)
         .then(res =>{
             alert(`결과 : ${res.data.result}`)
-            // alert(`넘어온 JSON : ${JSON.stringify(res.data)}`)
-            // const signUp = res.data
-            // document.getElementById('result-span').innerHTML =`
-            // <h3>${signUp.name}님 회원가입을 축하합니다!</h3>
-            // `
         })
         .catch(err=>{alert.err})
     }
@@ -42,7 +37,6 @@ export default function SignUp(){
 
             <button>전송</button><button>취소</button>
         </div>
-        <div><span id="result-span"></span></div>
         </form>
     </>)
 }

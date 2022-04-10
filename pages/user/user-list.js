@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../common/style/table.module.css'
 
@@ -18,7 +19,12 @@ const Table = ({columns, colspan, data}) => {
                                      </tr>
                 :data.map((user) => (
                     <tr className={styles.tr} key={user.username}>
-                        <td className={styles.td}>{user.username}</td>
+                        <td className={styles.td}>
+                            <Link href={{pathname:`/user/[username]`,
+                                        query:{selectedUser: 'test'}}} as={`/user/${user.username}`}>
+                                <a>{user.username}</a>
+                            </Link>
+                        </td>
                         <td className={styles.td}>{user.password}</td>
                         <td className={styles.td}>{user.name}</td>
                         <td className={styles.td}>{user.telephone}</td>
