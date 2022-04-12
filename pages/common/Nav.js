@@ -19,7 +19,6 @@ export default function Nav(){
         <li className={styles.li}> <Link href='../user/login'>login</Link> </li>
         <li className={styles.li}> <Link href='../user/join'>join</Link> </li>
         <li className={styles.li}> <Link href='../user/user-list'>UserList</Link> </li>
-
       </ul>
     </nav>
   );
