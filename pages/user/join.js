@@ -35,7 +35,7 @@ const defaultValues = {
   telephon: ''
 };
 
-export default function Register3Page() {
+export default function Join() {
   const { control, formState, handleSubmit, reset } = useForm({
     mode: 'onChange',
     defaultValues,
