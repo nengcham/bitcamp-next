@@ -2,7 +2,7 @@ import axios from "axios"
 import style from "board/style/board-form.module.css"
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { addBoard } from '../../redux/reducers/board.reducer'
+import { addBoard } from '../../redux/reducers/boardReducer.ts'
 
 export default function Board(){
     const [inputs, setInputs] = useState({})
@@ -13,17 +13,7 @@ export default function Board(){
         const { name, value } = e.target
         setInputs({ ...inputs, [name]: value })
     }
-    {/**
-    const handleSubmit = e => {
-        e.preventDefault()
-        
-        alert(`데이터셋 출력 : ${JSON.stringify(inputs)}`)
-        axios.post('http://localhost:5000/api/board/write', inputs)
-        .then(res => {
-            alert(`결과 : ${res.data.result}`)
-        })
-        .catch(err => alert(err))
-    */}
+
     return (<>
         <h1>게시글 등록</h1>
         <div className={style.container}>

@@ -15,12 +15,13 @@ import _ from '@lodash';
 // import './style/UserLayout.scss'
 // import './style/UserRegister.scss'
 // import { CheckList } from '..';
-import { joinRequest } from '../../redux/reducers/user.reducer';
+import { joinRequest } from '../../redux/reducers/userReducer.ts';
 
 const schema = yup.object().shape({
-  username: yup.string().required('사용자 ID를 입력하시오'),
+  userid: yup.string().required('사용자 ID를 입력하시오'),
   name: yup.string().required('사용자 이름를 입력하시오'),
-  telephon: yup.string().required('사용자 전화번호를 입력하시오'),
+  email: yup.string().required('이메일을 입력하시오'),
+  phone: yup.string().required('사용자 전화번호를 입력하시오'),
   password: yup
     .string()
     .required('사용자 비밀번호를 입력하시오')
@@ -29,10 +30,13 @@ const schema = yup.object().shape({
 });
 
 const defaultValues = {
-  username: '',
+  userid: '',
   password: '',
+  email: '',
   name: '',
-  telephon: ''
+  phone: '',
+  birth: '',
+  address: ''
 };
 
 export default function Join() {
@@ -51,7 +55,7 @@ export default function Join() {
 
   return (
     <>
-      <div className="User-container">
+      <div className="User-container"  style={{ width: "60vh" }}>
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -83,10 +87,9 @@ export default function Join() {
                   name="registerForm"
                   noValidate
                   className="flex flex-col justify-center w-full"
-                  onSubmit={handleSubmit(async (data) => { await dispatch(joinRequest({ ...data, })) })}
                 >
                   <Controller
-                    name="username"
+                    name="userid"
                     control={control}
                     render={({ field }) => (
                       <TextField
@@ -94,16 +97,18 @@ export default function Join() {
                         className="mb-16"
                         label="Name"
                         autoFocus
-                        type="username"
-                        error={!!errors.username}
-                        helperText={errors?.username?.message}
+                        type="userid"
+                        error={!!errors.userid}
+                        helperText={errors?.userid?.message}
                         variant="outlined"
                         required
                         fullWidth
                       />
                     )}
                   />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button onClick={() => dispatch(
+                    exist(document.getElementById('userid').value))}>중복체크</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
                   <Controller
@@ -127,6 +132,26 @@ export default function Join() {
                   <button onClick={() => dispatch(
                     exist(document.getElementById('email').value))}>중복체크</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  
+                  <Controller
+                    id='name'
+                    name="name"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        className="mb-16"
+                        label="name"
+                        type="text"
+                        error={!!errors.name}
+                        helperText={errors?.name?.message}
+                        variant="outlined"
+                        required
+                        fullWidth
+                      />
+                    )}
+                  />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                   <Controller
                     name="phone"

@@ -36,7 +36,7 @@ const Table = ({columns, colspan, data}) => {
 }
 
 export default function Userlist(){
-    const columns = ["Username", "Password", "Name", "Telephone"]
+    const columns = ["사용자ID", "이름", "이메일", "전화번호", "생년월일", "주소"]
     const [data, setData] = useState([])
     const count = data.length
     useEffect(()=>{
@@ -48,7 +48,7 @@ export default function Userlist(){
         <h1>사용자 목록</h1>
         {count != 0 && <h3>회원수 : { count }명</h3>}
         <div className={styles.td}>
-        <Table columns={columns} colspan={4} data={data}/>
+        <Table columns={columns} colspan={columns.length} data={data}/>
         </div>
         </>)
 }

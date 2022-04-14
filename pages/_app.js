@@ -1,12 +1,11 @@
-import {Layout} from "common";
-import wrapper from '../redux/store'
-import { PropTypes } from 'prop-types'
-import Head from "next/head";
-
-const App = ({ Component, pageProps }) => {
+import {Layout} from "./common";
+import { wrapper } from '../redux/store.ts'
+import { PropTypes } from "prop-types";
+import Head from 'next/head'
+const App = ({ Component, pageProps}) => {
   return (<>
     <Head>
-      <meta charset="utf-8"/>
+      <meta charSet="utf-8"/>
       <meta name="viewport" 
       content="width=device-width, user-scalable=no, 
       initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"></meta>
@@ -25,4 +24,3 @@ const App = ({ Component, pageProps }) => {
 }
 
 export default wrapper.withRedux(App)
-
