@@ -18,16 +18,19 @@ const Table = ({columns, colspan, data}) => {
                                      <td colSpan={colspan} className={styles.td}>데이터가 없습니다.</td>
                                      </tr>
                 :data.map((user) => (
-                    <tr className={styles.tr} key={user.username}>
+                    <tr className={styles.tr} key={user.userid}>
                         <td className={styles.td}>
-                            <Link href={{pathname:`/user/[username]`,
-                                        query:{selectedUser: 'test'}}} as={`/user/${user.username}`}>
-                                <a>{user.username}</a>
+                            <Link href={{pathname:`/user/[userid]`,
+                                        query:{selectedUser: 'test'}}} as={`/user/${user.userid}`}>
+                                <a>{user.userid}</a>
                             </Link>
                         </td>
                         <td className={styles.td}>{user.password}</td>
+                        <td className={styles.td}>{user.email}</td>
                         <td className={styles.td}>{user.name}</td>
-                        <td className={styles.td}>{user.telephone}</td>
+                        <td className={styles.td}>{user.phone}</td>
+                        <td className={styles.td}>{user.birth}</td>
+                        <td className={styles.td}>{user.address}</td>
                     </tr>
                 ))}
             </tbody>
@@ -36,7 +39,7 @@ const Table = ({columns, colspan, data}) => {
 }
 
 export default function Userlist(){
-    const columns = ["사용자ID", "이름", "이메일", "전화번호", "생년월일", "주소"]
+    const columns = ["사용자ID", "비밀번호", "이메일", "이름", "전화번호", "생일", "주소"]
     const [data, setData] = useState([])
     const count = data.length
     useEffect(()=>{

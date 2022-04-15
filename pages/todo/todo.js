@@ -1,86 +1,77 @@
 import React,{useState} from "react";
 import { useDispatch } from 'react-redux'
-import { addTask } from '../../redux/reducers/todoReducer.ts'
+import { todoActions } from '../../redux/reducers/todoReducer.ts'
+import style from '../common/style/table.module.css'
 
 export default function AppTodo() {
-  const [value, setValue] = useState('')
+  const [inputs, setInputs] = useState({})
   const dispatch = useDispatch()
+  const handleChange = e =>{
+    e.preventDefault()
+    const{name, value} = e.target;
+    setInputs({...inputs,[name]: value})
+}
+  const data = []
 
   return (
-     <div className="todoapp stack-large">
+     <div>
       <h1>일정등록</h1>
       <form onSubmit={ e => {
         e.preventDefault()
-        alert('value: '+value)  
-        if(value) dispatch(addTask({task: value}))
+        alert(' 진행1 버튼클릭 : '+JSON.stringify(inputs))  
+        if(inputs) dispatch(todoActions.addRequest(inputs))
       }}>
+        <label><b>사용자ID</b></label>
         <input
           type="text"
-          id="new-todo-input"
-          className="input input__lg"
-          name="text"
+          id="userid"
+          name="userid"
           autoComplete="off"
-          onChange={e => {
-            e.preventDefault()
-            setValue(e.target.value)
-          }}
-        />
+          onChange={handleChange}
+        /><br/>
+        <label><b>등록할 일정</b></label>
+        <input
+          type="text"
+          id="task"
+          name="task"
+          autoComplete="off"
+          onChange={handleChange}
+        /><br/>
+        <label><b>수행여부</b></label>
+        <select
+          type="text"
+          id="completed"
+          name="completed"
+          autoComplete="off"
+          onChange={handleChange}>
+          <option value="T">완료함(T)</option>
+          <option value="F">진행중(F)</option>
+        </select><br/>
         <button style={{marginLeft:"20px"}} type="submit" className="btn btn__primary btn__lg">
           Add
         </button>
       </form>
-      {/**
-      <div className="filters btn-group stack-exception">
-        <button type="button" className="btn toggle-btn" aria-pressed="true">
-          <span className="visually-hidden">Show </span>
-          <span>all</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-        <button type="button" className="btn toggle-btn" aria-pressed="false">
-          <span className="visually-hidden">Show </span>
-          <span>Active</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-        <button type="button" className="btn toggle-btn" aria-pressed="false">
-          <span className="visually-hidden">Show </span>
-          <span>Completed</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-      </div>
-      
-      <h2 id="list-heading">
-        3 tasks remaining
-      </h2>
-      <ul
-        role="list"
-        className="todo-list stack-large stack-exception"
-        aria-labelledby="list-heading"
-      >
-        <li className="todo stack-small">
-          <div className="c-cb">
-            <input  id="todo-0" type="checkbox" defaultChecked={false} onChange={()=>{
-              setCheck(!check)
-            }}/>
-            <label className="todo-label" htmlFor="todo-0">
-              운동 24시간 하기
-            </label>
-            { check ? <Image class="rotate-center"
-            style={{ visibility: "visible", float: "right" }}
-            src="/vercel.svg" width="64" height="64"  />
-            :<Image
-            style={{ width: '6%', visibility: "hidden", float: "right" }}
-            src="/vercel.svg" width="64" height="64"  />}
-          </div>
-          <div className="btn-group">
-            <button type="button" className="btn">
-              Edit <span className="visually-hidden">Eat</span>
-            </button>
-            <button type="button" className="btn btn__danger">
-              Delete <span className="visually-hidden">Eat</span>
-            </button>
-          </div>
-        </li>
-      </ul>*/}
+      <table className={style.table}>
+      <thead>
+          <tr>
+              <th> ### Todo 리스트 ### </th>
+          </tr>
+      </thead>
+      <tbody>
+      { data.length == 0 
+        ? <tr>
+            <td>일정이 없습니다.</td>
+          </tr>
+        :data.map((todo) => (
+            <tr key={todo}>
+                <td>
+                    <input type="checkbox"/>
+                    <a>{todo}</a>
+                </td>
+            </tr>
+          ))}
+      </tbody>
+  </table>          
     </div>
   );
 }
