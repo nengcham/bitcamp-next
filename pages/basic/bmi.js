@@ -40,3 +40,5 @@ export default function Bmi(){
    <div> 결과 : <span id="result-span"></span></div>
   </div>
 }
+
+
