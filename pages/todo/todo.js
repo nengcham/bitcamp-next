@@ -1,4 +1,6 @@
-import React,{useState} from "react";
+import axios from "axios";
+import { set } from "lodash";
+import React,{useEffect, useState} from "react";
 import { useDispatch } from 'react-redux'
 import { todoActions } from '../../redux/reducers/todoReducer.ts'
 import style from '../common/style/table.module.css'
@@ -11,7 +13,13 @@ export default function AppTodo() {
     const{name, value} = e.target;
     setInputs({...inputs,[name]: value})
 }
-  const data = []
+  const [data, setData] = useState([])
+  
+  useEffect(()=>{
+    axios.get('http://localhost:5000/api/todo/list')
+    .then(res=>{setData(res.data.todos)})
+    .catch(err=>{})
+  },[])
 
   return (
      <div>
@@ -54,6 +62,7 @@ export default function AppTodo() {
       <table className={style.table}>
       <thead>
           <tr>
+              <th> ### User Id ### </th>
               <th> ### Todo 리스트 ### </th>
           </tr>
       </thead>
@@ -64,10 +73,11 @@ export default function AppTodo() {
           </tr>
         :data.map((todo) => (
             <tr key={todo}>
-                <td>
-                    <input type="checkbox"/>
-                    <a>{todo}</a>
-                </td>
+              <td>{todo.userid}</td>
+              <td>
+                  <input type="checkbox"/>
+                  <a>{todo.task}</a>
+              </td>
             </tr>
           ))}
       </tbody>
