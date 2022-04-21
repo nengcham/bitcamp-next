@@ -1,6 +1,7 @@
 import {Layout} from "./common";
 import { wrapper } from '../redux/store.ts'
 import Head from 'next/head'
+import Image from "next/image";
 const App = ({ Component, pageProps}) => {
   return (<>
     <Head>
@@ -12,7 +13,7 @@ const App = ({ Component, pageProps}) => {
       <title>Soccer App</title>
     </Head>
     <Layout>
-      <Component {...pageProps} />
+    <Component {...pageProps} />
     </Layout>
     </>
   )

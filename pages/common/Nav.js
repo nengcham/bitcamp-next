@@ -4,11 +4,12 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import tableStyles from "../common/style/Nav.module.css"
 import MenuItem from '@mui/material/MenuItem';
+import Image from 'next/image';
 
 export default function Nav(){
   const basicUrls = ["/basic/counter","/basic/calc","/basic/bmi"]
   const basicSubTitle = ["카운터","계산기","BMI"]
-  const userUrls = ["/user/join","/user/login","/user/logout","/user/profile","/user/modify","/user/withdraw","user/list"]
+  const userUrls = ["/user/join","/user/login","/user/logout","/user/profile","/user/modify","/user/withdraw","/user/list"]
   const userSubTitle = ["회원가입","로그인","로그아웃","프로필","회원수정","회원탈퇴","회원목록"]
   const todoUrls = ["/todo/addTodo","/todo/list","/todo/modify","/todo/remove"]
   const todoSubTitle = ["할일등록","할일목록","할일수정","할일삭제"]
@@ -22,7 +23,9 @@ export default function Nav(){
   return (
     <table className={tableStyles.table}>
       <tr>
-      <td><SubMenu title={"기본"} urls={basicUrls} subTitles={basicSubTitle}/>
+      <td>
+        <a href={"/"}><Image src="/user/main.gif" width="30" height="20" alt='타이핑'></Image></a>
+        <SubMenu title={"기본"} urls={basicUrls} subTitles={basicSubTitle}/>
         <SubMenu title={"사용자"} urls={userUrls} subTitles={userSubTitle}/>
         <SubMenu title={"투두"} urls={todoUrls} subTitles={todoSubTitle}/>
         <SubMenu title={"게임"} urls={gameUrls} subTitles={gameSubTitle}/>
