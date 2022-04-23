@@ -29,7 +29,7 @@ export default function Home() {
         <div id="timeZone"></div></td>
         </tr>
         <td>
-        <Image src="/user/main.gif" width="600" height="400" alt='타이핑'></Image>
+        <Image src="/user/main.gif" width="600" height="400" alt='me'></Image>
         </td>
     </tbody>
   </table>
